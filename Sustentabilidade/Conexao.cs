@@ -1,6 +1,5 @@
-using MySqlConnector;
- 
-public class Conexao
+// using MySqlConnector;
+class Conexao
 {
     public static MySqlConnection Conectar()
     {

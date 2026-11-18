@@ -14,12 +14,8 @@
     </PackageReference>
 
     <PackageReference Include="MySql.EntityFrameworkCore" Version="10.0.12" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Sustentabilidade\**" />
-    <EmbeddedResource Remove="Sustentabilidade\**" />
-    <None Remove="Sustentabilidade\**" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
   </ItemGroup>
 
 </Project>
