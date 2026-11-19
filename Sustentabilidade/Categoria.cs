@@ -16,6 +16,18 @@ public class Categoria
  
     public override string ToString()
     {
-        return $"ID: {IdCategoria} | Nome: {Nome} | Descrição: {Descricao}";
+        return $"ID: {Id} | Nome: {Nome} | Descrição: {Descricao}";
+    }
+    static async Task CriarCategoria(string nome, string descricao)
+    {
+        await using var db = new AppDbContext();
+        var categoria = new Categoria
+        {
+            Nome = nome,
+            Descricao = descricao
+        };
+        db.Categorias.Add(categoria);
+        await db.SaveChangesAsync();
+        Console.WriteLine($"Categoria cadastrada com sucesso! ID: {categoria.Id}");
     }
 }
