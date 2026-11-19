@@ -1,14 +1,11 @@
-// using MySqlConnector;
-class Conexao
+using Microsoft.EntityFrameworkCore;
+
+namespace CrudEF.Data;
+public class AppDbContext : DbContext
 {
-    public static MySqlConnection Conectar()
+    public DbSet<Categoria> Categorias { get; set;}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string stringConexao = "Server=localhost;Port=3306;Database=sustentabilidade;User ID=root;Password=Senac2026;";
- 
-        MySqlConnection conexao = new MySqlConnection(stringConexao);
- 
-        conexao.Open();
- 
-        return conexao;
+        optionsBuilder.UseMySQL(@"server=localhost;database=Sustentabilidade;user=root;password=Senac2026");
     }
 }
