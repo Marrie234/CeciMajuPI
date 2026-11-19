@@ -2,7 +2,7 @@ public class Residuo
 
 {
 
-    public int IdResiduo { get; set; }
+    public int Id { get; set; }
 
     public string Nome { get; set; } = "";
 
@@ -39,7 +39,7 @@ public class Residuo
 
     {
 
-        return $"ID: {IdResiduo} | Nome: {Nome} | Reciclável: {(Reciclavel ? "Sim" : "Não")} | Orientação: {Orientacao}";
+        return $"ID: {Id} | Nome: {Nome} | Reciclável: {(Reciclavel ? "Sim" : "Não")} | Orientação: {Orientacao}";
 
     }
 

@@ -1,6 +1,6 @@
 public class PontoColeta
 {
-    public int IdPonto { get; set; }
+    public int Id { get; set; }
     public string Nome { get; set; } = "";
     public string Endereco { get; set; } = "";
     public string Bairro { get; set; } = "";
@@ -24,6 +24,6 @@ public class PontoColeta
  
     public override string ToString()
     {
-        return $"ID: {IdPonto} | Nome: {Nome} | Endereço: {Endereco} | Bairro: {Bairro} | Cidade: {Cidade}";
+        return $"ID: {Id} | Nome: {Nome} | Endereço: {Endereco} | Bairro: {Bairro} | Cidade: {Cidade}";
     }
 }
