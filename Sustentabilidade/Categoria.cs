@@ -42,6 +42,11 @@ public class Categoria
         await using var db = new AppDbContext();
         return await db.Categorias.FirstOrDefaultAsync(c => c.Nome == nome);
     }
+    public static async Task<Categoria?> BuscarPorId(int id)
+    {
+        await using var db = new AppDbContext();
+        return await db.Categorias.FindAsync(id);
+    }
     public static async Task AtualizarCategoria(int id, Categoria novaCategoria)
     {
         await using var db = new AppDbContext();
