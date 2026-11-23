@@ -21,7 +21,7 @@ public class Categoria
     {
         return $"ID: {Id} | Nome: {Nome} | Descrição: {Descricao}";
     }
-    static async Task CriarCategoria(string nome, string descricao)
+     public static async Task CriarCategoria(string nome, string descricao)
     {
         await using var db = new AppDbContext();
         var categoria = new Categoria
