@@ -8,6 +8,6 @@ public class AppDbContext : DbContext
     public DbSet<ResiduoPonto> ResiduosPontos { get; set;}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySQL(@"server=localhost;database=Sustentabilidade;user=root;password=Senac2026");
+        optionsBuilder.UseMySQL(@"server=localhost;database=sustentabilidade;user=root;password=Senac2026");
     }
 }
