@@ -52,5 +52,41 @@ public class PontoColeta
         await using var db = new AppDbContext();
         return await db.PontosColeta.FirstOrDefaultAsync(p => p.Nome == nome);
     }
-    
+    public static async Task<PontoColeta?> BuscarPorId(int id)
+    {
+        await using var db = new AppDbContext();
+        return await db.PontosColeta.FindAsync(id);
+    }
+    public static async Task AtualizarPontoColeta(int id, PontoColeta novoPontoColeta)
+    {
+        await using var db = new AppDbContext();
+        var pontoColeta = await db.PontosColeta.FindAsync(id);
+        if (pontoColeta == null)
+        {
+            Console.WriteLine("Ponto de coleta não encontrado.");
+            return;
+        }
+        pontoColeta.Nome = novoPontoColeta.Nome ?? pontoColeta.Nome;
+        pontoColeta.Endereco = novoPontoColeta.Endereco ?? pontoColeta.Endereco;
+        pontoColeta.Bairro = novoPontoColeta.Bairro ?? pontoColeta.Bairro;
+        pontoColeta.Cidade = novoPontoColeta.Cidade ?? pontoColeta.Cidade;
+        pontoColeta.Telefone = novoPontoColeta.Telefone ?? pontoColeta.Telefone;
+        pontoColeta.HorarioFuncionamento = novoPontoColeta.HorarioFuncionamento ?? pontoColeta.HorarioFuncionamento;
+
+        await db.SaveChangesAsync();
+        Console.WriteLine($"Ponto de coleta atualizado com sucesso! ID: {pontoColeta.Id}");
+    }
+    public static async Task DeletarPontoColeta(int id)
+    {
+        await using var db = new AppDbContext();
+        var pontoColeta = await db.PontosColeta.FindAsync(id);
+        if (pontoColeta == null)
+        {
+            Console.WriteLine("Ponto de coleta não encontrado.");
+            return;
+        }
+        db.PontosColeta.Remove(pontoColeta);
+        await db.SaveChangesAsync();
+        Console.WriteLine($"Ponto de coleta deletado com sucesso! ID: {pontoColeta.Id}");
+    }
 }
