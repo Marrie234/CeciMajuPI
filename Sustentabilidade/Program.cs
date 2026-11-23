@@ -113,6 +113,88 @@ class Program
 
                 Console.WriteLine("===== Fim da listagem =====");
             }
+            else if (opcao == "5")
+            {
+                Console.WriteLine("===== Atualizar cadastro =====");
+
+                Console.WriteLine("O que deseja atualizar?");
+                Console.WriteLine("1. Resíduo");
+                Console.WriteLine("2. Ponto de coleta");
+                Console.WriteLine("3. Categoria");
+
+            string tipo = Console.ReadLine() ?? "";
+
+                if (tipo == "1")
+            {
+                Console.WriteLine("Digite o ID do resíduo:");
+                int id = int.Parse(Console.ReadLine() ?? "0");
+
+                Console.WriteLine("Digite o novo nome do resíduo:");
+                string nome = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite a nova descrição:");
+                string descricao = Console.ReadLine() ?? "";
+
+                Console.WriteLine("O resíduo é reciclável? (sim/não)");
+                string resposta = Console.ReadLine() ?? "";
+
+                bool reciclavel;
+
+                if (resposta.ToLower() == "sim")
+                {
+                reciclavel = true;
+                }
+                else
+            {
+            reciclavel = false;
+            }
+
+                Console.WriteLine("Digite a nova orientação de descarte:");
+                string orientacao = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite o novo ID da categoria:");
+                int idCategoria = int.Parse(Console.ReadLine() ?? "0");
+
+                Console.WriteLine("Resíduo atualizado com sucesso!");
+            }
+            else if (tipo == "2")
+            {
+                Console.WriteLine("Digite o ID do ponto de coleta:");
+                int id = int.Parse(Console.ReadLine() ?? "0");
+
+                Console.WriteLine("Digite o novo nome:");
+                string nome = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite o novo endereço:");
+                string endereco = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite o novo bairro:");
+                string bairro = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite a nova cidade:");
+                string cidade = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite o novo telefone:");
+                string telefone = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite o novo horário de funcionamento:");
+                string horario = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Ponto de coleta atualizado com sucesso!");
+            }
+            else if (tipo == "3")
+            {
+                Console.WriteLine("Digite o ID da categoria:");
+                int id = int.Parse(Console.ReadLine() ?? "0");
+
+                Console.WriteLine("Digite o novo nome da categoria:");
+                string nome = Console.ReadLine() ?? ""; 
+                Console.WriteLine("Digite a nova descrição:");
+                string descricao = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Categoria atualizada com sucesso!");
+            }
+        }
 
             else if (opcao == "7")
             {
