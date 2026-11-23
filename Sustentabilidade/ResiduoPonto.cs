@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 public class ResiduoPonto
 {
     public int Id { get; set; }
@@ -69,7 +70,7 @@ public class ResiduoPonto
             Console.WriteLine("Resíduo-Ponto não encontrado.");
             return;
         }
-        
+
         db.ResiduosPontos.Remove(residuoPonto);
         await db.SaveChangesAsync();
         Console.WriteLine($"Resíduo-Ponto deletado com sucesso! ID: {residuoPonto.Id}");
