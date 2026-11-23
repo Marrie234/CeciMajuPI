@@ -2,12 +2,13 @@ using Microsoft.EntityFrameworkCore;
 
 public class Categoria
 {
-    public int Id{ get; set; }
+
+    public int Id { get; set; }
     public string Nome { get; set; } = "";
     public string Descricao { get; set; } = "";
  
     public Categoria()
-    {
+    {  
     }
  
     public Categoria(string nome, string descricao)
