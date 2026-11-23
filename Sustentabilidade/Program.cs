@@ -17,7 +17,10 @@ class Program
         Console.WriteLine("1. Cadastrar um novo resíduo");
         Console.WriteLine("2. Cadastrar um novo ponto de coleta");
         Console.WriteLine("3. Cadastrar uma nova categoria");
-        Console.WriteLine("4. Sair");
+        Console.WriteLine("4. Listar residuos, pontos de coleta e categorias");
+        Console.WriteLine("5. Atualizar um cadastro");
+        Console.WriteLine("6. Excluir um cadastro");
+        Console.WriteLine("7. Sair");
 
         Console.WriteLine("Digite uma opção:");
             opcao = Console.ReadLine() ?? "";
@@ -78,7 +81,7 @@ class Program
 
                 Console.WriteLine("Ponto de coleta cadastrado com sucesso!");
 
-    }
+            }
             
             else if (opcao == "3")
             {
@@ -93,6 +96,25 @@ class Program
                 Console.WriteLine("Categoria cadastrada com sucesso!");
             }
             else if (opcao == "4")
+            {
+                Console.WriteLine("===== Listar cadastros =====");
+
+                Console.WriteLine("===== Categorias cadastradas =====");
+
+            // Aqui vamos chamar o método para listar categorias.
+
+                Console.WriteLine("===== Resíduos cadastrados =====");
+
+            // Aqui vamos chamar o método para listar resíduos.
+
+                Console.WriteLine("===== Pontos de coleta cadastrados =====");
+
+            // Aqui vamos chamar o método para listar pontos de coleta.
+
+                Console.WriteLine("===== Fim da listagem =====");
+            }
+
+            else if (opcao == "7")
             {
                 Console.WriteLine("Obrigada por ajudar o planeta! Até mais!");
             }
