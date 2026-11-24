@@ -1,13 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using Org.BouncyCastle.Crypto.Generators;
+using System.Threading.Tasks;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         string opcao = "";
 
-        while (opcao != "4")
+        while (opcao != "7")
     
     {
         Console.WriteLine("=================================================");
@@ -54,6 +55,7 @@ class Program
 
                 Console.WriteLine("Digite o ID da categoria:");
                 int idCategoria = int.Parse(Console.ReadLine() ?? "0");
+                await Residuo.CriarResiduo(nome, descricao, reciclavel, orientacao, idCategoria);
 
                 Console.WriteLine("Resíduo cadastrado com sucesso!");
             }
@@ -78,8 +80,8 @@ class Program
 
                 Console.WriteLine("Digite o horário de funcionamento:");
                 string horario = Console.ReadLine() ?? "";
-
-                Console.WriteLine("Ponto de coleta cadastrado com sucesso!");
+                await PontoColeta.CriarPontoColeta(nome, endereco, bairro, cidade, telefone, horario);
+    
 
             }
             
@@ -95,26 +97,81 @@ class Program
 
                 Console.WriteLine("Categoria cadastrada com sucesso!");
             }
+            
+            
             else if (opcao == "4")
             {
                 Console.WriteLine("===== Listar cadastros =====");
 
-                Console.WriteLine("===== Categorias cadastradas =====");
+                Console.WriteLine("Qual você deseja listar?");
+                Console.WriteLine("1. Resíduos");
+                Console.WriteLine("2. Pontos de coleta");
+                Console.WriteLine("3. Categorias");
 
-            // Aqui vamos chamar o método para listar categorias.
+                string escolha = Console.ReadLine() ?? "";
 
-                Console.WriteLine("===== Resíduos cadastrados =====");
+                if (escolha == "1")
+                {
+                    Console.WriteLine("===== Resíduos cadastrados =====");
 
-            // Aqui vamos chamar o método para listar resíduos.
+                    var residuos = await Residuo.ListarResiduos();
 
-                Console.WriteLine("===== Pontos de coleta cadastrados =====");
+                    if (residuos.Count == 0)
+                    {
+                        Console.WriteLine("Nenhum resíduo cadastrado.");
+                    }
+                    else
+                    {
+                        foreach (var residuo in residuos)
+                        {
+                            Console.WriteLine(residuo);
+                        }
+                    }
+                }
+                else if (escolha == "2")
+                {
+                    Console.WriteLine("===== Pontos de coleta cadastrados =====");
 
-            // Aqui vamos chamar o método para listar pontos de coleta.
+                    var pontos = await PontoColeta.ListarPontosColeta();
 
-                Console.WriteLine("===== Fim da listagem =====");
+                    if (pontos.Count == 0)
+                    {
+                        Console.WriteLine("Nenhum ponto de coleta cadastrado.");
+                    }
+                    else
+                    {
+                        foreach (var ponto in pontos)
+                        {
+                            Console.WriteLine(ponto);
+                        }
+                    }
+                }
+                else if (escolha == "3")
+                {
+                    Console.WriteLine("===== Categorias cadastradas =====");
+
+                    var categorias = await Categoria.ListarCategorias();
+
+                    if (categorias.Count == 0)
+                    {
+                        Console.WriteLine("Nenhuma categoria cadastrada.");
+                    }
+                    else
+                    {
+                        foreach (var categoria in categorias)
+                        {
+                            Console.WriteLine(categoria);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Opção inválida! Tente novamente.");
+                }
             }
+
             else if (opcao == "5")
-            {
+        {
                 Console.WriteLine("===== Atualizar cadastro =====");
 
                 Console.WriteLine("O que deseja atualizar?");
@@ -195,6 +252,37 @@ class Program
                 Console.WriteLine("Categoria atualizada com sucesso!");
             }
         }
+            else if (opcao == "6")
+            {
+                Console.WriteLine("===== Excluir cadastro =====");
+
+                Console.WriteLine("O que deseja excluir?");
+                Console.WriteLine("1. Resíduo");
+                Console.WriteLine("2. Ponto de coleta");
+                Console.WriteLine("3. Categoria");
+
+                string tipo = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Digite o ID do cadastro que deseja excluir:");
+                int id = int.Parse(Console.ReadLine() ?? "0");
+
+                if (tipo == "1")
+                {
+                Console.WriteLine("Resíduo excluído com sucesso!");
+                }
+                else if (tipo == "2")
+                {
+                Console.WriteLine("Ponto de coleta excluído com sucesso!");
+                }
+                else if (tipo == "3")
+                {
+                Console.WriteLine("Categoria excluída com sucesso!");
+                }
+                else
+                {
+                Console.WriteLine("Opção inválida!");
+                }
+            }
 
             else if (opcao == "7")
             {
@@ -208,4 +296,3 @@ class Program
             Console.WriteLine();
         }
     }
-}
