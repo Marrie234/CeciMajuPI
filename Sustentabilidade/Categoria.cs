@@ -1,8 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 public class Categoria
 {
-
+    [Column("id_categoria")]
     public int Id { get; set; }
     public string Nome { get; set; } = "";
     public string Descricao { get; set; } = "";

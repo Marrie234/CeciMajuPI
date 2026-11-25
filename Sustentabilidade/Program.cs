@@ -57,7 +57,6 @@ class Program
                 int idCategoria = int.Parse(Console.ReadLine() ?? "0");
                 await Residuo.CriarResiduo(nome, descricao, reciclavel, orientacao, idCategoria);
 
-                Console.WriteLine("Resíduo cadastrado com sucesso!");
             }
             else if (opcao == "2")
             {
@@ -81,8 +80,6 @@ class Program
                 Console.WriteLine("Digite o horário de funcionamento:");
                 string horario = Console.ReadLine() ?? "";
                 await PontoColeta.CriarPontoColeta(nome, endereco, bairro, cidade, telefone, horario);
-    
-
             }
             
             else if (opcao == "3")
@@ -94,8 +91,8 @@ class Program
 
                 Console.WriteLine("Digite a descrição da categoria:");
                 string descricao = Console.ReadLine() ?? "";
+                await Categoria.CriarCategoria(nome, descricao);
 
-                Console.WriteLine("Categoria cadastrada com sucesso!");
             }
             
             
@@ -296,3 +293,4 @@ class Program
             Console.WriteLine();
         }
     }
+}
