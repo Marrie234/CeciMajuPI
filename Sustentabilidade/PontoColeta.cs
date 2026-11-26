@@ -42,29 +42,29 @@ public class PontoColeta
             Telefone = telefone,
             HorarioFuncionamento = horarioFuncionamento
         };
-        db.PontosColeta.Add(pontoColeta);
+        db.PontoColeta.Add(pontoColeta);
         await db.SaveChangesAsync();
         Console.WriteLine($"Ponto de coleta cadastrado com sucesso! ID: {pontoColeta.Id}");
     }
     public static async Task<List<PontoColeta>> ListarPontosColeta()
     {
         await using var db = new AppDbContext();
-        return await db.PontosColeta.ToListAsync();
+        return await db.PontoColeta.ToListAsync();
     }
     public static async Task<PontoColeta?> BuscarPorNome(string nome)
     {
         await using var db = new AppDbContext();
-        return await db.PontosColeta.FirstOrDefaultAsync(p => p.Nome == nome);
+        return await db.PontoColeta.FirstOrDefaultAsync(p => p.Nome == nome);
     }
     public static async Task<PontoColeta?> BuscarPorId(int id)
     {
         await using var db = new AppDbContext();
-        return await db.PontosColeta.FindAsync(id);
+        return await db.PontoColeta.FindAsync(id);
     }
     public static async Task AtualizarPontoColeta(int id, PontoColeta novoPontoColeta)
     {
         await using var db = new AppDbContext();
-        var pontoColeta = await db.PontosColeta.FindAsync(id);
+        var pontoColeta = await db.PontoColeta.FindAsync(id);
         if (pontoColeta == null)
         {
             Console.WriteLine("Ponto de coleta não encontrado.");
@@ -83,13 +83,13 @@ public class PontoColeta
     public static async Task DeletarPontoColeta(int id)
     {
         await using var db = new AppDbContext();
-        var pontoColeta = await db.PontosColeta.FindAsync(id);
+        var pontoColeta = await db.PontoColeta.FindAsync(id);
         if (pontoColeta == null)
         {
             Console.WriteLine("Ponto de coleta não encontrado.");
             return;
         }
-        db.PontosColeta.Remove(pontoColeta);
+        db.PontoColeta.Remove(pontoColeta);
         await db.SaveChangesAsync();
         Console.WriteLine($"Ponto de coleta deletado com sucesso! ID: {pontoColeta.Id}");
     }

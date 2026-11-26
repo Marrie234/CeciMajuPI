@@ -34,7 +34,7 @@ namespace CeciMajuPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categoria");
                 });
 
             modelBuilder.Entity("PontoColeta", b =>
@@ -69,7 +69,7 @@ namespace CeciMajuPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PontosColeta");
+                    b.ToTable("PontoColeta");
                 });
 
             modelBuilder.Entity("Residuo", b =>
@@ -98,7 +98,7 @@ namespace CeciMajuPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Residuos");
+                    b.ToTable("Residuo");
                 });
 
             modelBuilder.Entity("ResiduoPonto", b =>
@@ -115,7 +115,7 @@ namespace CeciMajuPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ResiduosPontos");
+                    b.ToTable("ResiduoPonto");
                 });
 #pragma warning restore 612, 618
         }

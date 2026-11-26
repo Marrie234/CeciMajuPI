@@ -57,29 +57,29 @@ public class Residuo
             Orientacao = orientacao,
             IdCategoria = idCategoria
         };
-        db.Residuos.Add(residuo);
+        db.Residuo.Add(residuo);
         await db.SaveChangesAsync();
         Console.WriteLine($"Resíduo cadastrado com sucesso! ID: {residuo.Id}");
     }
     public static async Task<List<Residuo>> ListarResiduos()
     {
         await using var db = new AppDbContext();
-        return await db.Residuos.ToListAsync();
+        return await db.Residuo.ToListAsync();
     }
     public static async Task<Residuo?> BuscarPorNome(string nome)
     {
         await using var db = new AppDbContext();
-        return await db.Residuos.FirstOrDefaultAsync(r => r.Nome == nome);
+        return await db.Residuo.FirstOrDefaultAsync(r => r.Nome == nome);
     }
     public static async Task<Residuo?> BuscarPorId(int id)
     {
         await using var db = new AppDbContext();
-        return await db.Residuos.FindAsync(id);
+        return await db.Residuo.FindAsync(id);
     }
     public static async Task AtualizarResiduo(int id, Residuo novoResiduo)
     {
         await using var db = new AppDbContext();
-        var residuo = await db.Residuos.FindAsync(id);
+        var residuo = await db.Residuo.FindAsync(id);
         if (residuo == null)
         {
             Console.WriteLine("Resíduo não encontrado.");
@@ -97,13 +97,13 @@ public class Residuo
     public static async Task DeletarResiduo(int id)
     {
         await using var db = new AppDbContext();
-        var residuo = await db.Residuos.FindAsync(id);
+        var residuo = await db.Residuo.FindAsync(id);
         if (residuo == null)
         {
             Console.WriteLine("Resíduo não encontrado.");
             return;
         }
-        db.Residuos.Remove(residuo);
+        db.Residuo.Remove(residuo);
         await db.SaveChangesAsync();
         Console.WriteLine($"Resíduo deletado com sucesso! ID: {residuo.Id}");
     }

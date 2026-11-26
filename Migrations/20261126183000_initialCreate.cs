@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CeciMajuPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AdicionarIdCategoria : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace CeciMajuPI.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Categorias",
+                name: "Categoria",
                 columns: table => new
                 {
                     id_categoria = table.Column<int>(type: "int", nullable: false)
@@ -25,12 +25,12 @@ namespace CeciMajuPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categorias", x => x.id_categoria);
+                    table.PrimaryKey("PK_Categoria", x => x.id_categoria);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "PontosColeta",
+                name: "PontoColeta",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -44,12 +44,12 @@ namespace CeciMajuPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PontosColeta", x => x.Id);
+                    table.PrimaryKey("PK_PontoColeta", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Residuos",
+                name: "Residuo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -62,12 +62,12 @@ namespace CeciMajuPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Residuos", x => x.Id);
+                    table.PrimaryKey("PK_Residuo", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "ResiduosPontos",
+                name: "ResiduoPonto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -77,7 +77,7 @@ namespace CeciMajuPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResiduosPontos", x => x.Id);
+                    table.PrimaryKey("PK_ResiduoPonto", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
         }
@@ -86,16 +86,16 @@ namespace CeciMajuPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Categorias");
+                name: "Categoria");
 
             migrationBuilder.DropTable(
-                name: "PontosColeta");
+                name: "PontoColeta");
 
             migrationBuilder.DropTable(
-                name: "Residuos");
+                name: "Residuo");
 
             migrationBuilder.DropTable(
-                name: "ResiduosPontos");
+                name: "ResiduoPonto");
         }
     }
 }

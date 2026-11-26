@@ -30,29 +30,29 @@ public class Categoria
             Nome = nome,
             Descricao = descricao
         };
-        db.Categorias.Add(categoria);
+        db.Categoria.Add(categoria);
         await db.SaveChangesAsync();
         Console.WriteLine($"Categoria cadastrada com sucesso! ID: {categoria.Id}");
     }
     public static async Task<List<Categoria>> ListarCategorias()
     {
         await using var db = new AppDbContext();
-        return await db.Categorias.ToListAsync();
+        return await db.Categoria.ToListAsync();
     }
         public static async Task<Categoria?> BuscarPorNome(string nome)
     {
         await using var db = new AppDbContext();
-        return await db.Categorias.FirstOrDefaultAsync(c => c.Nome == nome);
+        return await db.Categoria.FirstOrDefaultAsync(c => c.Nome == nome);
     }
     public static async Task<Categoria?> BuscarPorId(int id)
     {
         await using var db = new AppDbContext();
-        return await db.Categorias.FindAsync(id);
+        return await db.Categoria.FindAsync(id);
     }
     public static async Task AtualizarCategoria(int id, Categoria novaCategoria)
     {
         await using var db = new AppDbContext();
-        var categoria = await db.Categorias.FindAsync(id);
+        var categoria = await db.Categoria.FindAsync(id);
         if (categoria == null)
         {
             Console.WriteLine("Categoria não encontrada.");
@@ -67,13 +67,13 @@ public class Categoria
     public static async Task DeletarCategoria(int id)
     {
         await using var db = new AppDbContext();
-        var categoria = await db.Categorias.FindAsync(id);
+        var categoria = await db.Categoria.FindAsync(id);
         if(categoria == null)
         {
             Console.WriteLine("Categoria não encontrada.");
             return;
         }
-        db.Categorias.Remove(categoria);
+        db.Categoria.Remove(categoria);
         await db.SaveChangesAsync();
         Console.WriteLine("Categoria deletada com sucesso!");
     }
