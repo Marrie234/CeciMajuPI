@@ -191,18 +191,7 @@ class Program
 
                     Console.WriteLine("O resíduo é reciclável? (sim/não)");
                     string resposta = Console.ReadLine() ?? "";
-
-                    bool reciclavel;
-
-                    if (resposta.ToLower() == "sim")
-                    {
-                        reciclavel = true;
-                    }
-                    else
-                    {
-                        reciclavel = false;
-                    }
-
+                    
                     Console.WriteLine("Digite a nova orientação de descarte:");
                     string orientacao = Console.ReadLine() ?? "";
 
