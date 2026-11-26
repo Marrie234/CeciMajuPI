@@ -1,27 +1,27 @@
 -- Criando o banco de dados
- 
+CREATE DATABASE IF NOT EXISTS sustentabilidade;
 -- Escolhendo o banco
 USE sustentabilidade;
- 
+
 -- Tabela de categorias
 CREATE TABLE IF NOT EXISTS categoria (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT
 );
- 
+
 -- Tabela dos residuos
-CREATE TABLE IF NOT EXISTS residuo (
+CREATE TABLE IF NOT EXISTSresiduo (
     id_residuo INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
     reciclavel BOOLEAN NOT NULL,
     orientacao TEXT,
     id_categoria INT,
- 
+
     FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
- 
+
 -- Tabela dos pontos de coleta
 CREATE TABLE IF NOT EXISTS ponto_coleta (
     id_ponto INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,54 +32,54 @@ CREATE TABLE IF NOT EXISTS ponto_coleta (
     telefone VARCHAR(20),
     horario_funcionamento VARCHAR(100)
 );
- 
--- Essa tabela faz a ligaçao entre residuos e pontos
+
+-- Essa tabela faz a ligação entre residuos e pontos
 CREATE TABLE IF NOT EXISTS residuo_ponto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_residuo INT NOT NULL,
     id_ponto INT NOT NULL,
- 
+
     FOREIGN KEY (id_residuo) REFERENCES residuo(id_residuo),
     FOREIGN KEY (id_ponto) REFERENCES ponto_coleta(id_ponto)
 );
- 
+
 SHOW TABLES;
- 
+
 USE sustentabilidade;
- 
+
 INSERT INTO categoria (nome, descricao) VALUES
 ('Papel', 'Materiais feitos de papel'),
 ('Plastico', 'Materiais feitos de plastico'),
 ('Vidro', 'Materiais feitos de vidro'),
 ('Metal', 'Materiais feitos de metal'),
 ('Organico', 'Restos de alimentos e plantas');
- 
+
 -- Cadastrando alguns residuos
- 
+
 INSERT INTO residuo
 (nome, descricao, reciclavel, orientacao, id_categoria)
 VALUES
- 
+
 ('Papelão', 'Caixas de papelao', 1, 'Dobrar e colocar na coleta de papel', 1),
- 
+
 ('Jornal', 'Folhas de jornal usadas', 1, 'Manter seco e limpo', 1),
- 
+
 ('Garrafa PET', 'Garrafas de plastico', 1, 'Esvaziar e encaminhar para reciclagem', 2),
- 
+
 ('Sacola plastica', 'Sacolas de mercado', 1, 'Juntar e levar para coleta de plastico', 2),
- 
+
 ('Pote de vidro', 'Potes de vidro usados', 1, 'Lavar antes de descartar', 3),
- 
+
 ('Garrafa de vidro', 'Garrafas de vidro', 1, 'Separar dos outros materiais', 3),
- 
+
 ('Lata de aluminio', 'Latas de refrigerante', 1, 'Esvaziar antes de descartar', 4),
- 
+
 ('Lata de aço', 'Latas de alimentos', 1, 'Lavar antes de descartar', 4),
- 
+
 ('Casca de banana', 'Restos de frutas', 0, 'Pode ser utilizada na compostagem', 5),
- 
+
 ('Restos de comida', 'Sobras de alimentos', 0, 'Separar para compostagem', 5);
- 
+
 -- Mostrando os residuos cadastrados
 SELECT * FROM residuo;
 
