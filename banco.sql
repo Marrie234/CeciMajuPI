@@ -1,25 +1,27 @@
+
 -- Criando o banco de dados
 CREATE DATABASE IF NOT EXISTS sustentabilidade;
+
 -- Escolhendo o banco
 USE sustentabilidade;
 
 -- Tabela de categorias
 CREATE TABLE IF NOT EXISTS categoria (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    descricao TEXT
+    Nome VARCHAR(100) NOT NULL,
+    Descricao TEXT
 );
 
 -- Tabela dos residuos
 CREATE TABLE IF NOT EXISTS residuo (
-    id_residuo INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    descricao TEXT,
-    reciclavel BOOLEAN NOT NULL,
-    orientacao TEXT,
-    id_categoria INT,
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Descricao TEXT,
+    Reciclavel BOOLEAN NOT NULL,
+    Orientacao TEXT,
+    IdCategoria INT,
 
-    FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
+    FOREIGN KEY (IdCategoria) REFERENCES categoria(id_categoria)
 );
 
 -- Tabela dos pontos de coleta
@@ -33,13 +35,13 @@ CREATE TABLE IF NOT EXISTS ponto_coleta (
     horario_funcionamento VARCHAR(100)
 );
 
--- Essa tabela faz a ligação entre residuos e pontos
+-- Essa tabela faz a ligacao entre residuos e pontos
 CREATE TABLE IF NOT EXISTS residuo_ponto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_residuo INT NOT NULL,
     id_ponto INT NOT NULL,
 
-    FOREIGN KEY (id_residuo) REFERENCES residuo(id_residuo),
+    FOREIGN KEY (id_residuo) REFERENCES residuo(Id),
     FOREIGN KEY (id_ponto) REFERENCES ponto_coleta(id_ponto)
 );
 
@@ -47,7 +49,8 @@ SHOW TABLES;
 
 USE sustentabilidade;
 
-INSERT INTO categoria (nome, descricao) VALUES
+-- Cadastrando as categorias
+INSERT INTO categoria (Nome, Descricao) VALUES
 ('Papel', 'Materiais feitos de papel'),
 ('Plastico', 'Materiais feitos de plastico'),
 ('Vidro', 'Materiais feitos de vidro'),
@@ -55,9 +58,8 @@ INSERT INTO categoria (nome, descricao) VALUES
 ('Organico', 'Restos de alimentos e plantas');
 
 -- Cadastrando alguns residuos
-
 INSERT INTO residuo
-(nome, descricao, reciclavel, orientacao, id_categoria)
+(Nome, Descricao, Reciclavel, Orientacao, IdCategoria)
 VALUES
 ('Papelão', 'Caixas de papelao', 1, 'Dobrar e colocar na coleta de papel', 1),
 ('Jornal', 'Folhas de jornal usadas', 1, 'Manter seco e limpo', 1),
@@ -75,6 +77,7 @@ SELECT * FROM residuo;
 
 SELECT * FROM categoria;
 
+-- Cadastrando os pontos de coleta
 INSERT INTO ponto_coleta
 (nome, endereco, bairro, cidade, telefone, horario_funcionamento)
 VALUES
@@ -86,6 +89,7 @@ VALUES
 
 SELECT * FROM ponto_coleta;
 
+-- Ligando residuos aos pontos de coleta
 INSERT INTO residuo_ponto (id_residuo, id_ponto)
 VALUES
 (1, 1),
@@ -101,64 +105,72 @@ VALUES
 
 SELECT * FROM residuo_ponto;
 
+-- INNER JOIN entre residuos e categorias
 SELECT
-    residuo.nome AS residuo,
-    categoria.nome AS categoria
+    residuo.Nome AS residuo,
+    categoria.Nome AS categoria
 FROM residuo
 INNER JOIN categoria
-ON residuo.id_categoria = categoria.id_categoria;
+ON residuo.IdCategoria = categoria.id_categoria;
 
+-- INNER JOIN entre residuos e pontos de coleta
 SELECT
-    residuo.nome AS residuo,
+    residuo.Nome AS residuo,
     ponto_coleta.nome AS ponto_coleta
 FROM residuo
 INNER JOIN residuo_ponto
-ON residuo.id_residuo = residuo_ponto.id_residuo
+ON residuo.Id = residuo_ponto.id_residuo
 INNER JOIN ponto_coleta
 ON residuo_ponto.id_ponto = ponto_coleta.id_ponto;
 
+-- LEFT JOIN entre residuos e pontos de coleta
 SELECT
-    residuo.nome AS residuo,
+    residuo.Nome AS residuo,
     ponto_coleta.nome AS ponto_coleta
 FROM residuo
 LEFT JOIN residuo_ponto
-ON residuo.id_residuo = residuo_ponto.id_residuo
+ON residuo.Id = residuo_ponto.id_residuo
 LEFT JOIN ponto_coleta
 ON residuo_ponto.id_ponto = ponto_coleta.id_ponto;
 
+-- Consulta completa
 SELECT
-    residuo.nome AS residuo,
-    categoria.nome AS categoria,
+    residuo.Nome AS residuo,
+    categoria.Nome AS categoria,
     ponto_coleta.nome AS ponto_coleta
 FROM residuo
 INNER JOIN categoria
-ON residuo.id_categoria = categoria.id_categoria
+ON residuo.IdCategoria = categoria.id_categoria
 INNER JOIN residuo_ponto
-ON residuo.id_residuo = residuo_ponto.id_residuo
+ON residuo.Id = residuo_ponto.id_residuo
 INNER JOIN ponto_coleta
 ON residuo_ponto.id_ponto = ponto_coleta.id_ponto;
 
+-- Mostrando residuos reciclaveis e nao reciclaveis
 SELECT
-    nome AS residuo,
-    reciclavel,
-    orientacao
+    Nome AS residuo,
+    Reciclavel,
+    Orientacao
 FROM residuo
-ORDER BY reciclavel DESC;
+ORDER BY Reciclavel DESC;
 
+-- Quantidade de residuos por categoria
 SELECT
-    categoria.nome AS categoria,
-    COUNT(residuo.id_residuo) AS quantidade_residuos
+    categoria.Nome AS categoria,
+    COUNT(residuo.Id) AS quantidade_residuos
 FROM categoria
 LEFT JOIN residuo
-ON categoria.id_categoria = residuo.id_categoria
-GROUP BY categoria.nome;
+ON categoria.id_categoria = residuo.IdCategoria
+GROUP BY categoria.Nome;
 
+-- Quantidade de residuos reciclaveis e nao reciclaveis
 SELECT
-    reciclavel,
+    Reciclavel,
     COUNT(*) AS quantidade
 FROM residuo
-GROUP BY reciclavel;
+GROUP BY Reciclavel;
 
+-- Quantidade de residuos por ponto de coleta
 SELECT
     ponto_coleta.nome AS ponto_coleta,
     COUNT(residuo_ponto.id_residuo) AS quantidade_residuos
@@ -168,22 +180,23 @@ ON ponto_coleta.id_ponto = residuo_ponto.id_ponto
 GROUP BY ponto_coleta.nome
 ORDER BY quantidade_residuos DESC;
 
+-- Atualizando um residuo
 UPDATE residuo
-SET descricao = 'Caixas de papelão usadas'
-WHERE id_residuo = 1;
+SET Descricao = 'Caixas de papelão usadas'
+WHERE Id = 1;
 
 SELECT * FROM residuo
-WHERE id_residuo = 1;
+WHERE Id = 1;
 
-INSERT INTO residuo (nome, descricao, reciclavel, orientacao, id_categoria)
+-- Inserindo um residuo de teste
+INSERT INTO residuo (Nome, Descricao, Reciclavel, Orientacao, IdCategoria)
 VALUES ('Residuo de teste', 'Registro temporario', 1, 'Teste de exclusao', 1);
 
-DELETE FROM residuo
-WHERE id_residuo = 11;
+-- Excluindo o residuo de teste
 
-SELECT id_residuo, nome
+
+-- Conferindo a exclusao
+SELECT Id, Nome
 FROM residuo
-WHERE nome = 'Residuo de teste';
+WHERE Nome = 'Residuo de teste';
 
-DELETE FROM residuo
-WHERE id_residuo = 11;
